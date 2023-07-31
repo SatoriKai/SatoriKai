@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+</head>
+<body>
+
+
+  <style type="text/css">
+    /*=====================================
+    reset estilos
+    no es necesario que copies esto
+    =====================================*/
+    
+    html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        line-height: 1.4;
+    }
+    
+    
+    * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    body {
+        color: #404040;
+        font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+    }
+    
+    /*=====================================
+    estilos de la utilidad
+    Copiar esto
+    =====================================*/
+    .seccion-perfil-usuario .perfil-usuario-body,
+    .seccion-perfil-usuario {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(#B873FF, transparent);
+        margin-bottom: 1.25rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada {
+        display: block;
+        position: relative;
+        width: 90%;
+        height: 17rem;
+        background-image: linear-gradient(45deg, #BC3CFF, #317FFF);
+        border-radius: 0 0 20px 20px;
+        /*
+        background-image: url('http://localhost/multimedia/png/user-portada-3.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        */
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 25px;
+        background-color: rgba(0, 0, 0, .5);
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada i {
+        margin-right: 1rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar {
+        display: flex;
+        width: 180px;
+        height: 180px;
+        align-items: center;
+        justify-content: center;
+        border: 7px solid #FFFFFF;
+        background-color: #DFE5F2;
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        position: absolute;
+        bottom: -40px;
+        left: calc(50% - 90px);
+        z-index: 1;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar img {
+        width: 100%;
+        position: relative;
+        border-radius: 50%;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar {
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        border: 0;
+        background-color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body {
+        width: 70%;
+        position: relative;
+        max-width: 750px;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body .titulo {
+        display: block;
+        width: 100%;
+        font-size: 1.75em;
+        margin-bottom: 0.5rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body .texto {
+        color: #848484;
+        font-size: 0.95em;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-footer,
+    .seccion-perfil-usuario .perfil-usuario-bio {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.5rem 2rem;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        background-color: #fff;
+        border-radius: 15px;
+        width: 100%;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-bio {
+        margin-bottom: 1.25rem;
+        text-align: center;
+    }
+    
+    .seccion-perfil-usuario .lista-datos {
+        width: 50%;
+        list-style: none;
+    }
+    
+    .seccion-perfil-usuario .lista-datos li {
+        padding: 5px 0;
+    }
+    
+    .seccion-perfil-usuario .lista-datos li>.icono {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        vertical-align: middle;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales {
+        position: absolute;
+        right: calc(0px - 50px - 1rem);
+        top: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales .boton-redes {
+        border: 0;
+        background-color: #fff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        font-size: 1.3rem;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+        margin-top: .5rem;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.facebook {
+        background-color: #5955FF;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.twitter {
+        background-color: #35E1BF;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.instagram {
+        background: linear-gradient(45deg, #FF2DFD, #40A7FF);
+    }
+    
+    /* adactacion a dispositivos */
+    @media (max-width: 750px) {
+        .seccion-perfil-usuario .lista-datos {
+            width: 100%;
+        }
+    
+        .seccion-perfil-usuario .perfil-usuario-portada,
+        .seccion-perfil-usuario .perfil-usuario-body {
+            width: 95%;
+        }
+    
+        .seccion-perfil-usuario .redes-sociales {
+            position: relative;
+            flex-direction: row;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: center
+        }
+    
+        .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+            margin-left: 1rem;
+            margin-top: 0;
+        }
+    }
+    </style>
+        <!--==========================
+    =            html            =
+    ===========================-->
+        <section class="seccion-perfil-usuario">
+            <div class="perfil-usuario-header">
+                <div class="perfil-usuario-portada">
+                  
+                    <div class="perfil-usuario-avatar">
+                        <img src="images/descarga.png" alt="img-avatar">
+                        <button type="button" class="boton-avatar">
+                            <i class="far fa-image"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="boton-portada">
+                        <i class="far fa-image"></i> Cambiar fondo
+                    </button>
+                </div>
+            </div>
+            <div class="perfil-usuario-body">
+                <div class="perfil-usuario-bio">
+                    <h3 class="titulo">Emily Johnson</h3>
+                    <p class="texto">Profesora de literatura en un instituto, amo enseñar y mostrar mi conocimientos.</p>
+                </div>
+                <div class="perfil-usuario-footer">
+                    <ul class="lista-datos">
+                        <li><i class="icono fas fa-phone-alt"></i> Telefono:091772891</li>
+                        <li><i class="icono fas fa-briefcase"></i> Trabaja en instituto del libro.</li>
+                        <li><i class="icono fas fa-building"></i> Cargo profesora</li>
+                    </ul>
+                    <ul class="lista-datos">
+                        <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento 3 de enero</li>
+                        <li><i class="icono fas fa-user-check"></i> Registro.</li>
+                        <li><i class="icono fas fa-share-alt"></i> Redes sociales @Emily_Johnson.</li>
+                    </ul>
+                </div>
+                <div class="redes-sociales">
+                    <a href="" class="boton-redes facebook fab fa-facebook-f"><i class="icon-facebook"></i></a>
+                    <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
+                    <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+        <!--====  End of html  ====-->
+    
+    <!--=============================
+    redes sociales fijadas en pantalla
+    No es necesario que copies esto!
+    ==============================-->
+    <style>
+    .mensaje a {
+        color: inherit;
+        margin-right: .5rem;
+        display: inline-block;
+    }
+    .mensaje a:hover {
+        color: #309B76;
+        transform: scale(1.4)
+    }
+    </style>
+    <div class="mis-redes" style="display: block;position: fixed;bottom: 1rem;left: 1rem; opacity: 0.5; z-index: 1000;">
+        <p style="font-size: .75rem;">Apock graficos</p>
+        <div>
+            <a target="_blank" href="https://www.facebook.com/ApockGraficos"><i class="fab fa-facebook-square"></i></a>
+            <a target="_blank" href="https://twitter.com/ApockGraficos"><i class="fab fa-twitter"></i></a>
+            <a target="_blank" href="https://www.instagram.com/ApockGraficos"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://www.youtube.com/channel/UC15DkMZQ80aoW_Rqk4n2T_w"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+    <!--====  End of tarjeta  ====-->
+      
+<style>
+  body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f7f7f7;
+   }
+
+   .blog-container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #ffffff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+   
+   .blog {
+     border: 1px solid #ddd;
+     padding: 10px;
+     margin-bottom: 15px;
+   }
+   
+   .blog h3 {
+     margin-top: 0;
+   }
+   
+   .blog img {
+     max-width: 100%;
+     height: auto;
+     margin-bottom: 10px;
+   }
+   
+  
+
+.use-profile {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: #ffffff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+ text-align: center;
+}
+
+.use-avatar img {
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+ margin-bottom: 10px;
+}
+
+.use-name {
+ font-size: 24px;
+ font-weight: bold;
+ margin-bottom: 5px;
+}
+
+.use-email {
+ color: #777;
+ margin-bottom: 20px;
+}
+
+.use-info {
+ color: #555;
+ margin-bottom: 20px;
+}
+
+.use-blogs {
+ margin-top: 30px;
+}
+
+.blog {
+ border: 1px solid #ddd;
+ padding: 10px;
+ margin-bottom: 15px;
+}
+
+.blog h3 {
+ margin-top: 0;
+}
+
+/* Optional: Add some styles for links */
+a {
+ color: #007BFF;
+ text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;
+}
+
+
+ 
+ nav ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ nav li {
+   display: inline;
+   margin-right: 1rem;
+ }
+ 
+ nav a {
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+ main {
+   padding: 1rem;
+ }
+ 
+ section {
+   margin-bottom: 2rem;
+ }
+ 
+ 
+ 
+
+</style>
+    <div class="blog-container">
+      <div class="blog">
+        <h3>Realismo Mágico en la Literatura</h3>
+        <img src="images/realismo-magico.jpg" alt="Realismo Mágico">
+        <main>
+          <section id="introduccion">
+            <h2>¿Qué es el Realismo Mágico?</h2>
+            <p>El Realismo Mágico es un estilo literario que se originó en América Latina durante el siglo XX, aunque también ha influido en escritores de otras partes del mundo. Esta corriente se caracteriza por la inclusión de elementos mágicos, fantásticos o sobrenaturales en un contexto realista y cotidiano. Es una fusión sorprendente entre lo mundano y lo místico, donde lo imposible adquiere un sentido de normalidad.</p>
+          </section>
+  
+
+  <section id="raices">
+    <h2>Raíces Históricas del Realismo Mágico</h2>
+    <p>El Realismo Mágico emergió en una época marcada por grandes cambios sociales, políticos y culturales en América Latina. Los escritores encontraron en esta corriente una manera de reflejar la complejidad y riqueza de sus sociedades, utilizando elementos fantásticos para abordar cuestiones profundas y universales. Autores como Gabriel García Márquez (Cien años de soledad), Julio Cortázar (Rayuela) y Jorge Luis Borges (Ficciones) son algunos de los pilares fundamentales del movimiento.
+
+    </p>
+  </section>
+
+  <section id="caracteristicas">
+    <h2>Características del Realismo Mágico</h2>
+    <p>Ambiente Evocador: Los escritores realistas mágicos son maestros en crear ambientes cautivadores que evocan una sensación de lo misterioso y lo inexplicable. Utilizan una prosa poética y descriptiva que sumerge al lector en paisajes y escenarios oníricos.</p>
+    
+    <p>Tiempo Cíclico: El tiempo en estas obras suele ser circular, rompiendo con la linealidad que estamos acostumbrados. Los eventos históricos pueden repetirse o entrelazarse con los acontecimientos presentes, creando una sensación de atemporalidad. </p>
+    
+    <p>Lo Cotidiano y lo Extraordinario: Los elementos fantásticos se incorporan de manera natural en el día a día de los personajes, conviviendo con lo ordinario. Esto permite que los lectores se conecten con las historias a nivel emocional y reflexionen sobre aspectos de la existencia humana. </p>
+    <p> Personajes Míticos y Simbólicos: Los protagonistas a menudo están imbuidos de características míticas y simbólicas, representando arquetipos que trascienden lo individual.</p>
+  </section>
+
+  <section id="legado">
+    <h2>El Legado del Realismo Mágico</h2>
+    <p>El Realismo Mágico ha dejado un impacto duradero en la literatura mundial. Sus obras han sido traducidas a numerosos idiomas y se han convertido en referentes de la narrativa contemporánea. Además de los escritores latinoamericanos, este estilo ha influenciado a autores de otras regiones, como Isabel Allende (La casa de los espíritus) y Haruki Murakami (Tokio Blues).</p>
+  </section>
+
+  <section id="conclusion">
+    <h2>Conclusión</h2>
+    <p>El Realismo Mágico nos invita a explorar las fronteras entre lo real y lo imaginario, a cuestionar la naturaleza misma de la realidad y a descubrir la belleza en lo extraordinario. A través de sus páginas, este género literario nos ofrece una experiencia única y enriquecedora que nos conecta con la esencia misma de la humanidad.
+
+      Así que, la próxima vez que te adentres en un libro de Realismo Mágico, déjate llevar por la magia y la maravilla que solo esta corriente puede ofrecer. En un mundo donde lo sobrenatural se encuentra con lo cotidiano, el Realismo Mágico continúa inspirándonos y asombrándonos, recordándonos que la literatura es un portal hacia lo desconocido y lo fascinante.</p>
+  </section>
+  <div>
+<div>
+</main>
+</div>
+</div>
+
+
+<div class="blog-container">
+  <div class="blog">
+    <h3>Descubriendo el Mundo de la Literatura: Un Viaje Apasionante a Través de las Letras</h3>
+      <img src="images/document1.png" >
+    </video>
+    <main>
+      <section id="introduccion">
+        <h2>El Poder de los Clásicos</h2>
+        <p>Nuestra travesía literaria comienza con los clásicos. Obras maestras como "Don Quijote de la Mancha" de Cervantes, "Orgullo y Prejuicio" de Jane Austen y "Crimen y Castigo" de Dostoievski nos invitan a explorar universos fascinantes y personajes inolvidables. Aprenderemos por qué estas obras perduran a lo largo del tiempo y cómo influyeron en la literatura moderna.</p>
+      </section>
+
+<main>
+<section id="introduccion">
+<h2>El Poder de los Clásicos</h2>
+<p> Nuestra travesía literaria comienza con los clásicos. Obras maestras como "Don Quijote de la Mancha" de Cervantes, "Orgullo y Prejuicio" de Jane Austen y "Crimen y Castigo" de Dostoievski nos invitan a explorar universos fascinantes y personajes inolvidables. Aprenderemos por qué estas obras perduran a lo largo del tiempo y cómo influyeron en la literatura moderna.
+</p>
+</section>
+
+<section id="raices">
+<h2>Explorando Géneros Literarios</h2>
+<p>En este capítulo, navegaremos por los distintos géneros literarios, desde la épica y la poesía hasta la ciencia ficción y el realismo mágico. Descubriremos cómo cada género tiene su propio encanto y cómo podemos encontrar uno que se adapte a nuestros gustos personales. Además, analizaremos las características únicas de cada género y cómo los autores juegan con ellas para contar sus historias.
+</p>
+</section>
+
+<section id="caracteristicas">
+<h2>El Arte de la Escritura Creativa</h2>
+<p>Aquí nos sumergiremos en el proceso creativo detrás de las grandes obras literarias. Exploraremos técnicas de escritura, como el uso de la metáfora, la construcción de personajes complejos y la creación de atmósferas cautivadoras. También aprenderemos a superar bloqueos creativos y a encontrar inspiración en nuestra propia vida cotidiana.</p>
+
+</section>
+
+<section id="legado">
+<h2>La Importancia del Análisis Literario</h2>
+<p>El análisis literario es una herramienta valiosa para entender a fondo las obras que leemos. En este capítulo, aprenderemos cómo desentrañar simbolismos, temáticas y mensajes ocultos en las páginas de los libros. A través del análisis, ampliaremos nuestra comprensión y aprecio por las obras, permitiéndonos ver más allá de la trama superficial.</p>
+</section>
+
+<section id="conclusion">
+<h2>La Magia de la Lectura</h2>
+<p>En este último capítulo, reflexionaremos sobre el poder transformador de la lectura en nuestras vidas. La literatura puede ser un refugio, una fuente de consuelo y una ventana al mundo. Discutiremos cómo incorporar el hábito de la lectura en nuestra rutina diaria y cómo esta práctica puede abrir horizontes y enriquecer nuestro ser.
+
+¡Y hasta aquí nuestro viaje literario! Espero que hayas disfrutado este recorrido y que sientas el entusiasmo por adentrarte en el maravilloso mundo de la literatura. Recuerda que cada libro es un tesoro esperando a ser descubierto, así que no dudes en compartir tus experiencias y recomendaciones con otros amantes de las letras. ¡Felices lecturas y que la magia de la literatura te acompañe siempre!</p>
+</section>
+</main>
+
+    </div>
+ 
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+

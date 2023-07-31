@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<title>Satori Kai</title>
+	<link rel="stylesheet" href="styles.css" />
+
+    <title>Formulario Registro</title>
+
+	<link rel="icon" href="images/logito.png" type=" image/png"> </head>
+
+</head>
+<body>
+	<header>
+
+		<div class="container-hero">
+			<div class="container hero">
+				<div class="customer-support">
+					<div class="container-logo">
+            <img src="images/logo.png" >
+          </div>
+          
+					<div class="content-customer-support">
+					</div>
+				</div>
+
+				<div class="container-logo">
+					<h1 class="logo"><a href="/"><img src="images/Mori.png"></a></h1>
+				</div>
+
+				<div class="container-user">
+					<i class="fas fa-user" id="openModalBtn"></i>
+					<div class="modal-container" id="modal-register">
+					  <div class="form-container" id="loginFormContainer">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Login</h1>
+						<form id="loginForm">
+						  <input type="email" placeholder="Email" required>
+						  <input type="password" placeholder="Password" required>
+						  <button type="submit">Login</button>
+						  <p>¿No tienes una cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+						</form>
+					  </div>
+				  
+					  <div class="form-container" id="registrationFormContainer" style="display: none;">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Register</h1>
+						<form id="registrationForm" onsubmit="handleRegistration(event)">
+							<!-- Dentro del formulario de registro -->
+<input type="text" id="username" placeholder="Username" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+<button type="submit">Register</button>
+<p>¿Ya tienes una cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión</a></p>
+
+						</form>
+					  </div>
+					</div>
+				  </div>
+					
+				</div>
+			</div>
+		</div>
+		<div id="usersList">
+			<!-- Users will be displayed here -->
+			<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+		 
+		</div>
+
+		<div class="container-navbar">
+			<nav class="navbar container">
+				<i class="fa-solid fa-bars"></i>
+				<ul class="menu">
+			
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="Explorar.html">Explora</a></li>
+					<li><a href="perfiles.html">Perfiles</a></li>
+					<li><a href="foro.html">Foro de discusión</a></li>
+					<li><a href="blog.html"> blog y recurosos</a></li>
+				</ul>
+
+				<form class="search-form" id="searchForm">
+					<input type="search" placeholder="Buscar..." id="searchInput" />
+					<button class="btn-search">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+			</nav>
+		</div>
+	</header>
+
+	<script>
+		document.getElementById("searchForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+	
+			const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+			let destinationUrl = "";
+	
+			switch (searchTerm) {
+				case "inicio":
+					destinationUrl = "index.html";
+					break;
+				case "explora":
+					destinationUrl = "Explorar.html";
+					break;
+				case "perfiles":
+					destinationUrl = "perfiles.html";
+					break;
+				case "foro":
+					destinationUrl = "foro.html";
+					break;
+				case "blog":
+				case "recursos":
+					destinationUrl = "blog.html";
+					break;
+				default:
+					// Handle other search terms or display a message if nothing matches
+					alert("No se encontraron resultados para la búsqueda.");
+					return;
+			}
+	
+			window.location.href = destinationUrl;
+		});
+	</script>
+
+	  
+	  
+	<script
+		src="https://kit.fontawesome.com/81581fb069.js"
+		crossorigin="anonymous"
+	></script>
+	<script>
+		
+		const openModalBtn = document.getElementById("openModalBtn");
+		const modalRegister = document.getElementById("modal-register");
+	  
+		// Function to show or hide the registration form when the user clicks the user icon
+		function toggleRegistrationForm() {
+		  modalRegister.style.display = modalRegister.style.display === "flex" ? "none" : "flex";
+		}
+	  
+		// Assign the click event to the user icon
+		openModalBtn.addEventListener("click", toggleRegistrationForm);
+	  
+		// Close the modal if the user clicks outside of it
+		window.onclick = function (event) {
+		  if (event.target === modalRegister) {
+			modalRegister.style.display = "none";
+		  }
+		};
+	  
+		// Function to show the login form and hide the registration form
+		function showLoginForm() {
+		  document.getElementById("loginFormContainer").style.display = "flex";
+		  document.getElementById("registrationFormContainer").style.display = "none";
+		}
+	  
+		// Function to show the registration form and hide the login form
+		function showRegisterForm() {
+		  document.getElementById("registrationFormContainer").style.display = "flex";
+		  document.getElementById("loginFormContainer").style.display = "none";
+		}
+	  
+		// Set the initial state to show the login form
+		showLoginForm();
+		
+		function hideModal() {
+    document.getElementById("modal-register").style.display = "none";
+  }
+
+  
+	  </script>
+	  <!-- ... (rest of the HTML code) ... -->
+
+<div id="searchResults">
+	<!-- Search results will be displayed here -->
+  </div>
+  
+  <!-- ... (rest of the HTML code) ... -->
+  
+
+  
+  <script>
+	// Function to show the login form and hide the registration form
+	function showLoginForm() {
+	  document.getElementById("loginFormContainer").style.display = "flex";
+	  document.getElementById("registrationFormContainer").style.display = "none";
+	}
+
+  
+	// Set the initial state to show the login form
+	showLoginForm();
+  
+	function hideModal() {
+	  document.getElementById("modal-register").style.display = "none";
+	}
+  
+	// Function to handle registration form submission
+	function handleRegistration(event) {
+	  event.preventDefault();
+	  const username = document.getElementById("username").value;
+	  const email = document.getElementById("email").value;
+	  const password = document.getElementById("password").value;
+	  // You can add validation here before calling the registerUser function
+	  registerUser(username, email, password);
+	  // After successful registration, you can show the login form
+	  showLoginForm();
+	}
+  
+	// Assign the form submit event to the registration form
+	document.getElementById("registrationForm").addEventListener("submit", handleRegistration);
+  </script>
+  
+  
+  
+
+
+
+   
+  <a href="2.html?userId=12346" class="user-card-link">
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/jhon.png" alt="User Avatar 3">
+	</div>
+	<div class="user-name">John Smith</div>
+	<div class="user-email">johnsm@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Programador</p>
+		<p>Profesional</p>
+	  </div>
+	  <div class="user-info">
+		<div id="user-info-container">
+		</div>
+		<div id="user-blogs-container">
+		</div>
+	  </div>
+  </div>
+
+  
+  <a href="3.html?userId=12346" class="user-card-link">
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/descarga.png" alt="User Avatar 4">
+	</div>
+	<div class="user-name">Emily Johnson</div>
+	<div class="user-email">emjohnson@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Profesora de literatura</p>
+		<p>Edad:29</p>
+	  </div>
+	  <div class="user-info">
+      <div id="user-info-container">
+      </div>
+      <div id="user-blogs-container">
+      </div>
+    </div>
+  </div>
+  
+  <a href="4.html?userId=12346" class="user-card-link">
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/descarga (2).png" alt="User Avatar 5">
+	</div>
+	<div class="user-name">Michael Brown</div>
+	<div class="user-email">mbrown@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Artista profesional</p>
+		<p>Imperrealismo</p>
+	  </div>
+  </div>
+  
+  <a href="5.html?userId=12345" class="user-card-link">
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/descarga (1).png" alt="User Avatar 6">
+	</div>
+	<div class="user-name">Sophia Lee</div>
+	<div class="user-email">solee@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Desarollador Web</p>
+		<p>Location: New York, USA</p>
+	  </div>
+  </div>
+  
+  <a href="6.html?userId=12346" class="user-card-link">
+
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/descarga (3).png" alt="User Avatar 7">
+	</div>
+	<div class="user-name">William Martinez</div>
+	<div class="user-email">willmartinez@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Chef profesional</p>
+		<p>Location: New York, USA</p>
+	  </div>
+  </div>
+  
+  <a href="7.html?userId=12346" class="user-card-link">
+
+  <div class="user-card">
+	<div class="user-avatar">
+	  <img src="images/descarga (4).png" alt="User Avatar 8">
+	</div>
+	<div class="user-name">Isabella Anderson</div>
+	<div class="user-email">isabella123@gmail.com</div>
+	<div class="user-info">
+		<!-- Additional information for John Doe -->
+		<p>Age: 30</p>
+		<p>Location: New York, USA</p>
+	  </div>
+	  <div id="user-info-container">
+	</div>
+	<div id="user-blogs-container">
+	</div>
+  </div>
+  </div>
+  
+ 
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+
+  </script>  
+  

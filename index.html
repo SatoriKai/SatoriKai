@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<title>Satori Kai</title>
+	<link rel="stylesheet" href="styles.css" />
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Formulario Registro</title>
+  <!-- Firebase JavaScript SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<link rel="icon" href="images/logito.png" type=" image/png"> </head>
+<body>
+	<header>
+
+		<div class="container-hero">
+			<div class="container hero">
+				<div class="customer-support">
+					<div class="container-logo">
+            <img src="images/logo.png" >
+          </div>
+          
+					<div class="content-customer-support">
+					</div>
+				</div>
+
+				<div class="container-logo">
+					<h1 class="logo"><a href="/"><img src="images/Mori.png"></a></h1>
+				</div>
+
+				<div class="container-user">
+					<i class="fas fa-user" id="openModalBtn"></i>
+					<div class="modal-container" id="modal-register">
+					  <div class="form-container" id="loginFormContainer">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Login</h1>
+						<form id="loginForm">
+						  <input type="email" placeholder="Email" required>
+						  <input type="password" placeholder="Password" required>
+						  <button type="submit">Login</button>
+						  <p>¿No tienes una cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+						</form>
+					  </div>
+				  
+					  <div class="form-container" id="registrationFormContainer" style="display: none;">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Register</h1>
+						<form id="registrationForm" onsubmit="handleRegistration(event)">
+							<!-- Dentro del formulario de registro -->
+<input type="text" id="username" placeholder="Username" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+<button type="submit">Register</button>
+<p>¿Ya tienes una cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión</a></p>
+
+						</form>
+					  </div>
+					</div>
+				  </div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="container-navbar">
+			<nav class="navbar container">
+				<i class="fa-solid fa-bars"></i>
+				<ul class="menu">
+			
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="Explorar.html">Explora</a></li>
+					<li><a href="perfiles.html">Perfiles</a></li>
+					<li><a href="foro.html">Foro de discusión</a></li>
+					<li><a href="blog.html"> blog y recurosos</a></li>
+				</ul>
+
+				<form class="search-form" id="searchForm">
+					<input type="search" placeholder="Buscar..." id="searchInput" />
+					<button class="btn-search">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+			</nav>
+		</div>
+	</header>
+
+	<script>
+		document.getElementById("searchForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+	
+			const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+			let destinationUrl = "";
+	
+			switch (searchTerm) {
+				case "inicio":
+					destinationUrl = "index.html";
+					break;
+				case "explora":
+					destinationUrl = "Explorar.html";
+					break;
+				case "perfiles":
+					destinationUrl = "perfiles.html";
+					break;
+				case "foro":
+					destinationUrl = "foro.html";
+					break;
+				case "blog":
+				case "recursos":
+					destinationUrl = "blog.html";
+					break;
+				default:
+					// Handle other search terms or display a message if nothing matches
+					alert("No se encontraron resultados para la búsqueda.");
+					return;
+			}
+	
+			window.location.href = destinationUrl;
+		});
+	</script>
+	
+
+
+	<section class="banner">
+		<div class="content-banner">
+			<p>¿Tienes una pasión o experiencia que deseas compartir? </p>
+			<h2>Te ofrecemos una experiencia única para compartir y aprender habilidades en diversas áreas.</h2>
+			<a href="#">Explorar</a>
+		</div>
+	</section>
+
+	<main class="main-content">
+		<section class="container container-features">
+			<div class="card-feature">
+				<div class="feature-content">
+					<span>Comparte</span>
+					<p>Puedes compartir tus conocimientos</p>
+				</div>
+			</div>
+			<div class="card-feature">
+				<div class="feature-content">
+					<span>Aprende</span>
+					<p>Hay varias cosas nuevas por aprender</p>
+				</div>
+			</div>
+			<div class="card-feature">
+				<div class="feature-content">
+					<span>Descubre</span>
+					<p>Encuentra nuevas oportunidades de aprendizaje y crecimiento</p>
+				</div>
+			</div>
+			<div class="card-feature">
+				<div class="feature-content">
+					<span>Conéctate</span>
+					<p>establece conexiones con otros usuarios, mentores y expertos en diferentes áreas para enriquecer su experiencia de aprendizaje</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="container top-categories">
+			<h1 class="heading-1">¡Bienvenidos a nuestra comunidad colaborativa y enriquecedora!</h1>
+			<div class="container-categories">
+				<div class="card-category category-libros">
+					<span>En este espacio, los usuarios tienen la oportunidad de compartir y aprender habilidades en diversas áreas, creando un ambiente propicio para el crecimiento personal y profesional. Nuestro objetivo es fomentar la colaboración y el intercambio de conocimiento entre personas con intereses similares.</span>
+				</div>
+				
+			</div>
+		</section>
+
+		<section class="container top-products">
+			<h1 class="heading-1">¿Qué ofrecemos?</h1>
+
+			
+
+			<div class="container-products">
+				<div class="card-product">
+					<div class="container-img">
+						
+					</div>
+					<div class="content-card-product">
+					
+						<h3>Explora las distintas opciones que ofrecemos y descubre cómo puedes mejorar tus habilidades mientras conectas con una comunidad apasionada por el conocimiento.
+
+						</h3>
+						
+					</div>
+				</div>
+				<!-- Producto 2 -->
+				<div class="card-product">
+					<div class="container-img">
+					</div>
+					<div class="content-card-product">
+						
+						<h3>Desde programación y diseño gráfico hasta cocina y habilidades de liderazgo, nuestra plataforma te ofrece la posibilidad de aprender a tu propio ritmo y desde cualquier lugar.</h3>
+						
+					</div>
+				</div>
+				<!-- Producto 3 -->
+				<div class="card-product">
+					<div class="container-img">
+						
+					</div>
+					<div class="content-card-product">
+						
+						<h3>Conéctate con personas de todo el mundo que comparten tus intereses y metas. </h3>
+						
+					
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="gallery">
+			<img src="images/depositphotos_250482280-stock-photo-team-of-colleagues-brainstorming-together.jpg" alt="Gallery Img1" class="gallery-img-1" />
+			<img src="images/f.elconfidencial.com_original_c2a_17f_019_c2a17f0190618a72fac4185f4c5b4f5e.jpg" alt="Gallery Img2" class="gallery-img-2" />
+			<img src="images/im1.jpg" alt="Gallery Img3" class="gallery-img-3" />
+			<img src="images/im2.jpg" alt="Gallery Img4" class="gallery-img-4" />
+			<img src="images/im3.avif" alt="Gallery Img5" class="gallery-img-5" />
+		</section>
+
+		<section class="container blogs">
+			<h1 class="heading-1">Últimas publicaciones</h1>
+		
+			<div class="container-blogs" id="latestPosts">
+				<div class="card-blog">
+					<script>
+						const sampleBlogPosts = [
+							{
+								title: "Post 1",
+								date: "2023-07-23",
+								content: "This is the content of Post 1.",
+								link: "blog.html#post-1", // Actual URL of the first blog post on "blog.html" page
+							},
+							{
+								title: "Post 2",
+								date: "2023-07-22",
+								content: "This is the content of Post 2.",
+								link: "blog.html#post-2", // Actual URL of the second blog post on "blog.html" page
+							},
+							{
+								title: "Post 3",
+								date: "2023-07-21",
+								content: "This is the content of Post 3.",
+								link: "blog.html#post-3", // Actual URL of the third blog post on "blog.html" page
+							},
+							// Add more sample blog posts as needed
+						];
+				
+						// Function to display the latest blog posts on the page
+						function displayLatestBlogPosts() {
+							const latestPostsContainer = document.getElementById("latestPosts");
+							if (!latestPostsContainer) return;
+				
+							let latestPostsHTML = "";
+							const latestPosts = sampleBlogPosts.slice(0, 3); // Show the latest 3 posts
+							latestPosts.forEach((post) => {
+								latestPostsHTML += `
+									<div class="card-blog">
+										<div class="container-img">
+										</div>
+										<div class="content-blog">
+											<h3>${post.title}</h3>
+											<span>${post.date}</span>
+											<p>${post.content}</p>
+											<a href="${post.link}" class="btn-read-more">Leer más</a>
+										</div>
+									</div>
+								`;
+							});
+				
+							latestPostsContainer.innerHTML = latestPostsHTML;
+						}
+				
+						// Call the function to display the latest blog posts
+						displayLatestBlogPosts();
+					</script>
+				
+				
+		</section>
+	</main>
+
+	
+					
+	
+	<form class="search-form" id="searchForm" action="explora.html">
+		</button>
+	  </form>
+	  
+	  
+	<script
+		src="https://kit.fontawesome.com/81581fb069.js"
+		crossorigin="anonymous"
+	></script>
+	<script>
+		
+		const openModalBtn = document.getElementById("openModalBtn");
+		const modalRegister = document.getElementById("modal-register");
+	  
+		// Function to show or hide the registration form when the user clicks the user icon
+		function toggleRegistrationForm() {
+		  modalRegister.style.display = modalRegister.style.display === "flex" ? "none" : "flex";
+		}
+	  
+		// Assign the click event to the user icon
+		openModalBtn.addEventListener("click", toggleRegistrationForm);
+	  
+		// Close the modal if the user clicks outside of it
+		window.onclick = function (event) {
+		  if (event.target === modalRegister) {
+			modalRegister.style.display = "none";
+		  }
+		};
+	  
+		// Function to show the login form and hide the registration form
+		function showLoginForm() {
+		  document.getElementById("loginFormContainer").style.display = "flex";
+		  document.getElementById("registrationFormContainer").style.display = "none";
+		}
+	  
+		// Function to show the registration form and hide the login form
+		function showRegisterForm() {
+		  document.getElementById("registrationFormContainer").style.display = "flex";
+		  document.getElementById("loginFormContainer").style.display = "none";
+		}
+	  
+		// Set the initial state to show the login form
+		showLoginForm();
+		
+		function hideModal() {
+    document.getElementById("modal-register").style.display = "none";
+  }
+
+  
+	  </script>
+	  
+	  <script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+		  apiKey: "YOUR_API_KEY",
+		  authDomain: "YOUR_AUTH_DOMAIN",
+		  databaseURL: "YOUR_DATABASE_URL",
+		  projectId: "YOUR_PROJECT_ID",
+		  storageBucket: "YOUR_STORAGE_BUCKET",
+		  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+		  appId: "YOUR_APP_ID"
+		};
+	  
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	  
+		// Function to register a new user
+		function registerUser(username, email, password) {
+		  var usersRef = firebase.database().ref("users");
+		  var newUserRef = usersRef.push();
+		  newUserRef.set({
+			username: username,
+			email: email,
+			password: password
+		  });
+		}
+	  </script>
+	  
+	  
+	   <script>
+		// Obtener los parámetros de búsqueda de la URL
+		const params = new URLSearchParams(window.location.search);
+		const searchQuery = params.get("q");
+	
+		// Mostrar los resultados de búsqueda en algún elemento del DOM
+		if (searchQuery) {
+		  // Aquí puedes realizar la búsqueda y mostrar los resultados en el DOM
+		  // Por ejemplo, puedes usar el valor de "searchQuery" para filtrar contenido
+		  // y mostrar los resultados en una lista o en cualquier otro formato deseado.
+	
+		  // Ejemplo: Mostrar los resultados en un elemento con el id "searchResults"
+		  const searchResultsElement = document.getElementById("searchResults");
+		  if (searchResultsElement) {
+			// Limpia el contenido existente, si lo hay
+			searchResultsElement.innerHTML = "";
+	
+			
+		  }
+		}
+	  </script>
+	<footer>
+        <div class="footer-container">
+            <div class="sec aboutus">
+                <h2>Redes sociales</h2>
+                <p>Si estás interesado en expandir tus conocimientos, tambien te extendemos una cordial invitación para que sigas algunas de nuestras redes sociales. A través de ellas, tendrás la oportunidad de acceder a contenido variado y enriquecedor que te ayudará a mejorar y ampliar tus habilidades y saberes.</p>
+                <ul class="sci">
+                    <div class="social-icons">
+						<!-- Icono de Facebook -->
+						<a href="https://www.facebook.com/profile.php?id=100093318325565" target="_blank">
+							<span class="facebook">
+								<i class="fa-brands fa-facebook-f"></i>
+							</span>
+						</a>
+						
+						<!-- Icono de Twitter -->
+						<a href="https://twitter.com/Satorikaiweb" target="_blank">
+							<span class="twitter">
+								<i class="fa-brands fa-twitter"></i>
+							</span>
+						</a>
+						
+						<!-- Icono de YouTube -->
+						<a href="https://www.youtube.com/@Satorikai" target="_blank">
+							<span class="youtube">
+								<i class="fa-brands fa-youtube"></i>
+							</span>
+						</a>
+						
+						
+						<!-- Icono de Instagram -->
+						<a href="https://www.instagram.com/plataformasatorikai/" target="_blank">
+							<span class="instagram">
+								<i class="fa-brands fa-instagram"></i>
+							</span>
+						</a>
+					</div>
+                </ul>
+            </div>
+           
+            <div class="sec contactBx">
+                <h2>Informacón de contacto</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class='bx bxs-map'></i></span>
+                        <span>							Instituto Tecnológico Superior de Paysandú
+							<br> Teléfono:
+							 <br> 092012792</span>
+                    </li>
+                    <li>
+                        <span><i class='bx bx-envelope' ></i></span>
+                        <p><a href="mailto: plataforma.satorikai@gmail.com">Email: plataforma.satorikai@gmail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+		<div class="footer-bottom">
+			<h3>Desarrollado por Angelina Genoud 2doBD © 2023</h3>
+			
+		</div>
+    </footer>
+
+	</body>
+	</html>

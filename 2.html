@@ -1,0 +1,531 @@
+
+	</script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satori Kai</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="icon" href="images/logito.png" type=" image/png"> </head>
+
+</head>
+<body>
+
+
+  <style type="text/css">
+    /*=====================================
+    reset estilos
+    no es necesario que copies esto
+    =====================================*/
+    
+    html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        line-height: 1.4;
+    }
+    
+    
+    * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    body {
+        color: #404040;
+        font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+    }
+    
+    /*=====================================
+    estilos de la utilidad
+    Copiar esto
+    =====================================*/
+    .seccion-perfil-usuario .perfil-usuario-body,
+    .seccion-perfil-usuario {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(#B873FF, transparent);
+        margin-bottom: 1.25rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada {
+        display: block;
+        position: relative;
+        width: 90%;
+        height: 17rem;
+        background-image: linear-gradient(45deg, #BC3CFF, #317FFF);
+        border-radius: 0 0 20px 20px;
+        /*
+        background-image: url('http://localhost/multimedia/png/user-portada-3.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        */
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 25px;
+        background-color: rgba(0, 0, 0, .5);
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada i {
+        margin-right: 1rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar {
+        display: flex;
+        width: 180px;
+        height: 180px;
+        align-items: center;
+        justify-content: center;
+        border: 7px solid #FFFFFF;
+        background-color: #DFE5F2;
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        position: absolute;
+        bottom: -40px;
+        left: calc(50% - 90px);
+        z-index: 1;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar img {
+        width: 100%;
+        position: relative;
+        border-radius: 50%;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar {
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        border: 0;
+        background-color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body {
+        width: 70%;
+        position: relative;
+        max-width: 750px;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body .titulo {
+        display: block;
+        width: 100%;
+        font-size: 1.75em;
+        margin-bottom: 0.5rem;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-body .texto {
+        color: #848484;
+        font-size: 0.95em;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-footer,
+    .seccion-perfil-usuario .perfil-usuario-bio {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.5rem 2rem;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        background-color: #fff;
+        border-radius: 15px;
+        width: 100%;
+    }
+    
+    .seccion-perfil-usuario .perfil-usuario-bio {
+        margin-bottom: 1.25rem;
+        text-align: center;
+    }
+    
+    .seccion-perfil-usuario .lista-datos {
+        width: 50%;
+        list-style: none;
+    }
+    
+    .seccion-perfil-usuario .lista-datos li {
+        padding: 5px 0;
+    }
+    
+    .seccion-perfil-usuario .lista-datos li>.icono {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        vertical-align: middle;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales {
+        position: absolute;
+        right: calc(0px - 50px - 1rem);
+        top: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales .boton-redes {
+        border: 0;
+        background-color: #fff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        font-size: 1.3rem;
+    }
+    
+    .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+        margin-top: .5rem;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.facebook {
+        background-color: #5955FF;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.twitter {
+        background-color: #35E1BF;
+    }
+    
+    .seccion-perfil-usuario .boton-redes.instagram {
+        background: linear-gradient(45deg, #FF2DFD, #40A7FF);
+    }
+    
+    /* adactacion a dispositivos */
+    @media (max-width: 750px) {
+        .seccion-perfil-usuario .lista-datos {
+            width: 100%;
+        }
+    
+        .seccion-perfil-usuario .perfil-usuario-portada,
+        .seccion-perfil-usuario .perfil-usuario-body {
+            width: 95%;
+        }
+    
+        .seccion-perfil-usuario .redes-sociales {
+            position: relative;
+            flex-direction: row;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: center
+        }
+    
+        .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+            margin-left: 1rem;
+            margin-top: 0;
+        }
+    }
+    </style>
+        <!--==========================
+    =            html            =
+    ===========================-->
+        <section class="seccion-perfil-usuario">
+            <div class="perfil-usuario-header">
+                <div class="perfil-usuario-portada">
+                  
+                    <div class="perfil-usuario-avatar">
+                        <img src="images/jhon.png" alt="img-avatar">
+                        <button type="button" class="boton-avatar">
+                            <i class="far fa-image"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="boton-portada">
+                        <i class="far fa-image"></i> Cambiar fondo
+                    </button>
+                </div>
+            </div>
+            <div class="perfil-usuario-body">
+                <div class="perfil-usuario-bio">
+                    <h3 class="titulo">John Smith</h3>
+                    <p class="texto">Programador independiente, mis pasatiempos son jugar y programar pero me encanta enseñarle a las personas.</p>
+                </div>
+                <div class="perfil-usuario-footer">
+                    <ul class="lista-datos">
+                        <li><i class="icono fas fa-phone-alt"></i> Telefono:086789o</li>
+                        <li><i class="icono fas fa-briefcase"></i> Trabaja como trabajador intendiente</li>
+                        <li><i class="icono fas fa-building"></i> Cargo profesional</li>
+                    </ul>
+                    <ul class="lista-datos">
+                        <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento 6 de junio</li>
+                        <li><i class="icono fas fa-user-check"></i> Registro.</li>
+                        <li><i class="icono fas fa-share-alt"></i> Redes sociales @John_Smith.</li>
+                    </ul>
+                </div>
+                <div class="redes-sociales">
+                    <a href="" class="boton-redes facebook fab fa-facebook-f"><i class="icon-facebook"></i></a>
+                    <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
+                    <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+        <!--====  End of html  ====-->
+    
+    <!--=============================
+    redes sociales fijadas en pantalla
+    No es necesario que copies esto!
+    ==============================-->
+    <style>
+    .mensaje a {
+        color: inherit;
+        margin-right: .5rem;
+        display: inline-block;
+    }
+    .mensaje a:hover {
+        color: #309B76;
+        transform: scale(1.4)
+    }
+    </style>
+    <div class="mis-redes" style="display: block;position: fixed;bottom: 1rem;left: 1rem; opacity: 0.5; z-index: 1000;">
+        <p style="font-size: .75rem;">Apock graficos</p>
+        <div>
+            <a target="_blank" href="https://www.facebook.com/ApockGraficos"><i class="fab fa-facebook-square"></i></a>
+            <a target="_blank" href="https://twitter.com/ApockGraficos"><i class="fab fa-twitter"></i></a>
+            <a target="_blank" href="https://www.instagram.com/ApockGraficos"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://www.youtube.com/channel/UC15DkMZQ80aoW_Rqk4n2T_w"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+    <!--====  End of tarjeta  ====-->
+      
+<style>
+  body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f7f7f7;
+   }
+
+   .blog-container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #ffffff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+   
+   .blog {
+     border: 1px solid #ddd;
+     padding: 10px;
+     margin-bottom: 15px;
+   }
+   
+   .blog h3 {
+     margin-top: 0;
+   }
+   
+   .blog img {
+     max-width: 100%;
+     height: auto;
+     margin-bottom: 10px;
+   }
+   
+  
+
+.use-profile {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: #ffffff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+ text-align: center;
+}
+
+.use-avatar img {
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+ margin-bottom: 10px;
+}
+
+.use-name {
+ font-size: 24px;
+ font-weight: bold;
+ margin-bottom: 5px;
+}
+
+.use-email {
+ color: #777;
+ margin-bottom: 20px;
+}
+
+.use-info {
+ color: #555;
+ margin-bottom: 20px;
+}
+
+.use-blogs {
+ margin-top: 30px;
+}
+
+.blog {
+ border: 1px solid #ddd;
+ padding: 10px;
+ margin-bottom: 15px;
+}
+
+.blog h3 {
+ margin-top: 0;
+}
+
+/* Optional: Add some styles for links */
+a {
+ color: #007BFF;
+ text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;
+}
+
+
+ 
+ nav ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ nav li {
+   display: inline;
+   margin-right: 1rem;
+ }
+ 
+ nav a {
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+ main {
+   padding: 1rem;
+ }
+ 
+ section {
+   margin-bottom: 2rem;
+ }
+ 
+ 
+ 
+
+</style>
+    <div class="blog-container">
+      <div class="blog">
+        <h3>Introducción a Python        </h3>
+        <img src="images/pyyy.png" alt="Realismo Mágico">
+        <main>
+          <section id="introduccion">
+            <h2></h2>
+            <p>Python es un lenguaje de programación interpretado de alto nivel que se utiliza en una variedad de aplicaciones. Algunos de sus usos comunes incluyen la automatización de tareas, la ciencia de datos y el desarrollo de aplicaciones web.
+
+                Para empezar en Python, necesitas tener instalado el intérprete de Python en tu ordenador. Puedes descargarlo desde el sitio web oficial.</p>
+          </section>
+  
+
+  <section id="raices">
+    <p>Una vez que lo tienes instalado, puedes abrir el intérprete de Python y comenzar a escribir código. Primero, podemos imprimir un mensaje simple en la pantalla:
+        <h3>print("Hola, mundo!") </h3>
+
+
+    </p>
+  </section>
+
+  <section id="caracteristicas">
+    <p>Este código imprimirá "Hola, mundo!" en la pantalla. También podemos hacer algunas operaciones matemáticas simples:
+<h3>print(2 + 2)
+</h3>
+    </p> 
+    <p>Este código imprimirá "4" en la pantalla.
+        Finalmente, podemos utilizar variables para almacenar información y hacer operaciones con ella:</p>
+        <h3>x = 5
+            y = 10
+            print(x + y)
+            </h3>
+    <p> Este código imprimirá "15" en la pantalla.
+
+        ¡Y eso es una introducción básica a Python! Espero que te haya gustado este pequeño tutorial.</p>
+  </section>
+
+  <div>
+<div>
+</main>
+</div>
+</div>
+
+
+<div class="blog-container">
+  <div class="blog">
+    <h3>¿Cómo empezar a programar desde cero?</h3>
+      <img src="images/programacion.jpg" >
+   <p>La programación es una herramienta muy útil y poderosa que te permitirá crear todo tipo de soluciones tecnológicas. Pero para muchos, el mundo de la programación puede parecer abrumador y difícil de entender. En este blog, te enseñaremos los conceptos básicos que necesitas saber para empezar a programar desde cero.</p>
+    <main>
+      <section id="introduccion">
+        <h2>Elige un lenguaje de programación:</h2>
+
+        <p> Hay muchos lenguajes de programación diferentes que puedes elegir, pero para empezar es mejor elegir uno que sea fácil de aprender y que tenga muchas herramientas disponibles. Algunos de los lenguajes más populares para principiantes son Python, Java y JavaScript.</p>
+      </section>
+      <section id="r">
+        <h2>Aprende los conceptos básicos:</h2>
+
+        <p> Antes de empezar a escribir código, es importante tener una comprensión básica de los conceptos principales de la programación, como variables, bucles y condicionales. Hacer algunos ejercicios de práctica en línea es una buena forma de aprender estos conceptos.</p>
+      </section>
+      <section id="x">
+        <h2>Encuentra recursos en línea:</h2>
+
+        <p> Hay muchos sitios web y aplicaciones que ofrecen cursos y tutoriales gratuitos de programación. Algunos de los más populares son Codeacademy y freeCodeCamp.</p>
+      </section>
+      <section id="w">
+        <h2>Crea proyectos pequeños: </h2>
+
+        <p>Al principio, es mejor empezar con proyectos pequeños para que puedas ir aprendiendo poco a poco. Por ejemplo, puedes intentar crear un programa que convierta grados Fahrenheit a Celsius o una calculadora simple.</p>
+      </section>
+      <section id="j">
+        <h2>Practica, practica, practica: </h2>
+
+        <p>La programación se aprende practicando, por lo que es importante dedicar tiempo todos los días a escribir código y resolver problemas. Con el tiempo, irás mejorando y los proyectos que puedas crear serán más avanzados.</p>
+      </section>
+
+
+</main>
+
+
+
+ 
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

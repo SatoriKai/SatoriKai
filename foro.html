@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<title>Satori Kai</title>
+	<link rel="stylesheet" href="styles.css" />
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Formulario Registro</title>
+  <!-- Firebase JavaScript SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<link rel="icon" href="images/logito.png" type=" image/png"> </head>
+<link rel="icon" href="images/logito.png" type=" image/png"> </head>
+
+</head>
+<body>
+	<header class="custom-header">
+
+		<div class="container-hero">
+			<div class="container hero">
+				<div class="customer-support">
+					<div class="container-logo">
+            <img src="images/logo.png" >
+          </div>
+          
+					<div class="content-customer-support">
+					</div>
+				</div>
+
+				<div class="container-logo">
+					<h1 class="logo"><a href="/"><img src="images/Mori.png"></a></h1>
+				</div>
+
+				<div class="container-user">
+					<i class="fas fa-user" id="openModalBtn"></i>
+					<div class="modal-container" id="modal-register">
+					  <div class="form-container" id="loginFormContainer">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Login</h1>
+						<form id="loginForm">
+						  <input type="email" placeholder="Email" required>
+						  <input type="password" placeholder="Password" required>
+						  <button type="submit">Login</button>
+						  <p>¿No tienes una cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+						</form>
+					  </div>
+				  
+					  <div class="form-container" id="registrationFormContainer" style="display: none;">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Register</h1>
+						<form id="registrationForm" onsubmit="handleRegistration(event)">
+							<!-- Dentro del formulario de registro -->
+<input type="text" id="username" placeholder="Username" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+<button type="submit">Register</button>
+<p>¿Ya tienes una cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión</a></p>
+
+						</form>
+					  </div>
+					</div>
+				  </div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="container-navbar">
+			<nav class="navbar container">
+				<i class="fa-solid fa-bars"></i>
+				<ul class="menu">
+			
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="Explorar.html">Explora</a></li>
+					<li><a href="perfiles.html">Perfiles</a></li>
+					<li><a href="foro.html">Foro de discusión</a></li>
+					<li><a href="blog.html"> blog y recurosos</a></li>
+				</ul>
+
+				<form class="search-form" id="searchForm">
+					<input type="search" placeholder="Buscar..." id="searchInput" />
+					<button class="btn-search">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+			</nav>
+		</div>
+	</header>
+</body>
+<body class="body-content">
+	
+
+	<script>
+		document.getElementById("searchForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+	
+			const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+			let destinationUrl = "";
+	
+			switch (searchTerm) {
+				case "inicio":
+					destinationUrl = "index.html";
+					break;
+				case "explora":
+					destinationUrl = "Explorar.html";
+					break;
+				case "perfiles":
+					destinationUrl = "perfiles.html";
+					break;
+				case "foro":
+					destinationUrl = "foro.html";
+					break;
+				case "blog":
+				case "recursos":
+					destinationUrl = "blog.html";
+					break;
+				default:
+					// Handle other search terms or display a message if nothing matches
+					alert("No se encontraron resultados para la búsqueda.");
+					return;
+			}
+	
+			window.location.href = destinationUrl;
+		});
+	</script>
+
+					
+	
+	<form class="search-form" id="searchForm" action="explora.html">
+		</button>
+	  </form>
+	  
+	  
+	<script
+		src="https://kit.fontawesome.com/81581fb069.js"
+		crossorigin="anonymous"
+	></script>
+	<script>
+		
+		const openModalBtn = document.getElementById("openModalBtn");
+		const modalRegister = document.getElementById("modal-register");
+	  
+		// Function to show or hide the registration form when the user clicks the user icon
+		function toggleRegistrationForm() {
+		  modalRegister.style.display = modalRegister.style.display === "flex" ? "none" : "flex";
+		}
+	  
+		// Assign the click event to the user icon
+		openModalBtn.addEventListener("click", toggleRegistrationForm);
+	  
+		// Close the modal if the user clicks outside of it
+		window.onclick = function (event) {
+		  if (event.target === modalRegister) {
+			modalRegister.style.display = "none";
+		  }
+		};
+	  
+		// Function to show the login form and hide the registration form
+		function showLoginForm() {
+		  document.getElementById("loginFormContainer").style.display = "flex";
+		  document.getElementById("registrationFormContainer").style.display = "none";
+		}
+	  
+		// Function to show the registration form and hide the login form
+		function showRegisterForm() {
+		  document.getElementById("registrationFormContainer").style.display = "flex";
+		  document.getElementById("loginFormContainer").style.display = "none";
+		}
+	  
+		showLoginForm();
+		
+		function hideModal() {
+    document.getElementById("modal-register").style.display = "none";
+  }
+
+  
+	  </script>
+	  
+	 
+	  
+	  
+	   <script>
+		const params = new URLSearchParams(window.location.search);
+		const searchQuery = params.get("q");
+	
+		if (searchQuery) {
+		
+		  const searchResultsElement = document.getElementById("searchResults");
+		  if (searchResultsElement) {
+			searchResultsElement.innerHTML = "";
+	
+			
+		  }
+		}
+	  </script>
+    
+<body>
+	
+	<style type="text/css">
+
+.header {
+			display: flex;
+			justify-content: flex-start; /* Align header elements to the left */
+			align-items: center;
+			padding: 10px;
+			background-color: #f0f0f0;
+		}
+
+		.header h1 {
+			margin: 0;
+			padding: 0;
+			font-size: 24px;
+			color: #333;
+		}
+
+		.header ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+		}
+
+		.header li {
+			margin-right: 15px;
+		}
+	html{
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+		line-height: 1.4;
+	}
+	
+	* {
+		margin: 0;
+		padding: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	
+	
+	body{
+		font-size: 16px; 
+	}
+	
+	.contenedor-comentarios {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		width: 100%;
+		
+	}
+	
+	.contenedor-comentarios img {
+		width: 100%;
+	}
+	
+	.area-comentar {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		margin-bottom: 1.5rem;
+		padding: 18px;
+		background-color: #fff;
+		box-shadow: 0 0 5px 2px rgba(0, 0, 0, .1);
+		border-radius: 12px;
+	}
+	
+	.comentarios-usuarios {
+		width: calc(100% - 2.5rem);
+	}
+	
+	.contenedor-comentarios a {
+		text-decoration: none;
+	}
+	
+	.comentar-publicacion .avatar,
+	.publicacion-realizada .usuario-publico .avatar,
+	.contenedor-comentarios .comentario-principal-usuario .avatar,
+	.area-comentar .avatar {
+		display: flex;
+		width: 65px;
+		height: 65px;
+		background-color: #F4F4F4;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+	.comentarios-usuarios .nombre-usuario {
+		font-weight: bold;
+		margin-right: .5rem;
+		color: inherit;
+	}
+	/* botones comentar */
+	.boton-subir-archivo {
+		position: relative;
+		display: inline-block;
+	}
+	
+	.boton-subir-archivo input[type="file"] {
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		position: absolute;
+		opacity: 0;
+		visibility: hidden;
+		width: 0;
+		height: 0;
+	}
+	
+	.boton-file,
+	.boton-enviar {
+		display: inline-block;
+		border: 0;
+		background-color: #374D71;
+		padding: 7px 15px;
+		margin-right: .5rem;
+		color: #fff;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: background-color ease-in 200ms;
+	}
+	
+	.boton-file:hover,
+	.boton-enviar:hover {
+		background-color: #4C6FA7;
+	}
+	
+	/* fin */
+	.contenedor-comentarios .comentario-principal-usuario .comentario,
+	.area-comentar .inputs-comentarios {
+		flex-grow: 1;
+		flex-basis: 0;
+		margin-left: .5rem;
+	}
+	
+	.area-comentar .inputs-comentarios {
+		margin-left: 1rem;
+	}
+	
+	.contenedor-comentarios .comentario-principal-usuario .texto,
+	.area-comentar .inputs-comentarios .area-comentario {
+		border: 0;
+		background-color: #F0F0F0;
+		display: block;
+		width: 100%;
+		border-radius: 12px;
+		margin-bottom: .5rem;
+	}
+	
+	.botones-comentario span.tiempo-comentario {
+		font-size: 0.8rem !important;
+		color: #9F9F9F;
+		margin-left: .25rem;
+	}
+	
+	.area-comentar .inputs-comentarios .area-comentario {
+		padding: 12px 15px;
+	}
+	
+	.area-comentar .inputs-comentarios .botones-comentar {
+		display: flex;
+	}
+	
+	/* comentarios de usuario */
+	.comentarios-usuarios .comentario-principal-usuario {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	
+	.comentarios-usuarios .usuario-comentario {
+		width: 100%;
+		display: block;
+		margin-bottom: 0.75rem;
+		position: relative;
+	}
+	
+	.menu-comentario {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		background-color: #E9E9E9;
+		border-radius: 50%;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+	
+	.comentarios-usuarios .usuario-comentario .menu-comentario {
+		top: 5px;
+		right: -15px;
+		box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+	}
+	
+	.comentarios-usuarios .usuario-comentario:hover .menu-comentario {
+		display: flex;
+	}
+	
+	.publicacion-realizada .menu-comentario {
+		display: flex;
+		right: 0;
+	}
+	
+	.contenedor-comentarios.comments-section {
+		margin: 20px; /* Adjust the value as needed */
+	}
+	.menu-comentario .menu {
+		list-style: none;
+		position: absolute;
+		right: 100%;
+		background-color: #fff;
+		box-shadow: 0 0 5px 1px rgba(0, 0, 0, .2);
+		border-radius: 8px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+		opacity: 0;
+		visibility: hidden;
+		transition: all ease-in 200ms;
+	}
+	
+	.menu-comentario:hover .menu {
+		opacity: 1;
+		visibility: visible;
+	}
+	
+	.menu-comentario .menu a {
+		display: block;
+		padding: 7px 15px;
+		color: inherit;
+	}
+	
+	.menu-comentario .menu a:hover {
+		background-color: #E1E1E1;
+	}
+	
+	.publicacion-realizada .usuario-publico .avatar,
+	.comentarios-usuarios .comentario-principal-usuario .avatar {
+		width: 45px;
+		height: 45px;
+	}
+	
+	.comentarios-usuarios .comentario-principal-usuario .texto {
+		padding: 10px 15px;
+		width: auto;
+		display: inline-block;
+		max-width: 100%;
+		margin-bottom: .25rem;
+		font-size: 0.9rem;
+		position: relative;
+		padding-right: 1.65rem;
+	}
+	
+	.comentarios-usuarios .comentario-principal-usuario .comentar-comentario {
+		width: 100%;
+		display: flex;
+	}
+	
+	.comentarios-usuarios .comentar-publicacion input[type="text"] {
+		border: 0;
+		background-color: #E1E1E1;
+		flex-grow: 1;
+		flex-basis: 0;
+		padding: 8px 10px;
+		font-size: .9rem;
+		border-radius: 8px;
+		margin-right: 0.5rem;
+		margin-left: 0.5rem;
+	}
+	
+	.botones-comentario {
+		display: block;
+	}
+	
+	.botones-comentario button {
+		display: inline-block;
+		border: 0;
+		padding: 3px 8px;
+		font-size: .8rem;
+		border-radius: 8px;
+		cursor: pointer;
+	}
+	
+	.botones-comentario button:hover {
+		background-color: #D5D8E1;
+	}
+	
+	.comentar-publicacion .avatar,
+	.contenedor-sub-comentarios .comentario-principal-usuario .avatar {
+		width: 32px;
+		height: 32px;
+	}
+	
+	.boton-enviar i,
+	.boton-file i,
+	.boton-puntuar i,
+	.boton-responder i {
+		margin-right: .5rem;
+	}
+	
+	/* publicacion realizada */
+	.publicacion-realizada {
+		margin-bottom: 1.5rem;
+	}
+	
+	.publicacion-realizada .usuario-publico {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		margin-bottom: .5rem;
+		position: relative;
+	}
+	
+	.publicacion-realizada .usuario-publico .contenido-publicacion {
+		margin-left: 1rem;
+	}
+	
+	.comentar-publicacion {
+		display: flex;
+		width: 100%;
+	}
+	
+	.comentar-publicacion .comentar-comentario {
+		flex-grow: 1;
+		flex-basis: 0;
+		display: flex;
+		align-items: center;
+	}
+	
+	.publicacion-realizada p {
+		margin-bottom: 0.5rem;
+		font-size: 0.9em;
+	}
+	
+	.archivo-publicado img {
+		position: relative;
+		width: 100%;
+		border-radius: 8px;
+	}
+	
+	.publicacion-realizada .contenido-publicacion ul {
+		list-style: none;
+		font-size: 0.8em;
+		color: #909090;
+	}
+	.nombre-usuario {
+    color: black; /* Cambiar el color del texto a negro */
+    text-decoration: none; /* Eliminar la subrayado del enlace si es necesario */
+  }
+
+	</style>
+
+<section class="contenedor-comentarios comments-section">
+	<div class="area-comentar">
+			<div class="avatar">
+				<img src="images/descarga (1).png" alt="img">
+			</div>
+			<form action="#" method="post" class="inputs-comentarios">
+				<textarea name="" class="area-comentario"></textarea>
+				<div class="botones-comentar">
+					<div class="boton-subir-archivo">
+						<label class="boton-file" for="adjuntar">
+							<i class="far fa-image"></i>
+							Adjuntar archivo
+						</label>
+						<input type="file" name="" value="" placeholder="" id="adjuntar">
+					</div>
+					<button class="boton-enviar" type="sutmit">
+						<i class="fas fa-paper-plane"></i>
+						Enviar
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="publicacion-realizada">
+			<div class="usuario-publico">
+				<div class="avatar">
+					<img src="images/descarga (3).png" alt="img">
+				</div>
+				<div class="contenido-publicacion">
+					<a href="6.html" title="" class="nombre-usuario">William Martinez</a>
+					<ul>
+						<li>Hace 3 min</li>
+					</ul>
+				</div>
+				<div class="menu-comentario">
+					<i class="fas fa-pen"></i>
+					<ul class="menu">
+						<li><a href="">Editar</a></li>
+						<li><a href="">Eliminar</a></li>
+					</ul>
+				</div>
+			</div>
+			<p>La clave para preparar un buen plato es utilizar ingredientes frescos y de calidad, así como combinar sabores e ingredientes que complementen entre sí para crear un sabor único y memorable. Cocinar es un arte en constante evolución en el que siempre hay algo nuevo por aprender y descubrir. y para ustedes, ¿Qué significa "combinar sabores e ingredientes que complementen entre sí" en la preparación de una comida?</p>
+			<div class="archivo-publicado">
+			</div>
+			<div class="botones-comentario">
+				<button type="" class="boton-puntuar">
+					<i class="fas fa-thumbs-up"></i>
+					45
+				</button>
+				<button type="" class="boton-responder">
+					Comentar
+				</button>
+			</div>
+		</div>
+		<div class="comentarios-usuarios">
+			<!-- comentario principal -->
+			<div class="comentario-principal-usuario">
+				<div class="avatar">
+					<img src="images/descarga (2).png" alt="img">
+				</div>
+				<div class="comentario">
+					<div class="usuario-comentario">
+						<div class="texto">
+							<a href="4.html" title="" class="nombre-usuario">Michael Brown</a>
+							<p> Nunca he entendido bien cómo combinar diferentes ingredientes para que juntos creen un sabor bueno.</p> 
+							<div class="menu-comentario">
+								<i class="fas fa-pen"></i>
+								<ul class="menu">
+									<li><a href="">Editar</a></li>
+									<li><a href="">Eliminar</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="botones-comentario">
+							<button type="" class="boton-puntuar">
+								<i class="fas fa-thumbs-up"></i>
+								5
+							</button>
+							<button type="" class="boton-responder">
+								responder
+							</button>
+							<span class="tiempo-comentario">
+								hece 3 min
+							</span>
+						</div>
+					</div>
+	
+					<!-- contenedor sub comentarios -->
+					<div class="contenedor-sub-comentarios">
+						<!-- sub-comentario uno -->
+						<div class="comentario-principal-usuario">
+							<div class="avatar">
+								<img src="images/descarga.png" alt="img">
+							</div>
+							<div class="comentario">
+								<div class="usuario-comentario">
+									<div class="texto">
+										<a href="3.html" title="" class="nombre-usuario">
+											Emily Johnson
+											</a>Yo siempre termino usando los mismos ingredientes y condimentos una y otra vez. Me pregunto si debería empezar a probar combinaciones nuevas para variar un poco.
+										<div class="menu-comentario">
+											<i class="fas fa-pen"></i>
+											<ul class="menu">
+												<li><a href="">Editar</a></li>
+												<li><a href="">Eliminar</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="botones-comentario">
+										<button type="" class="boton-puntuar">
+											<i class="fas fa-thumbs-up"></i>
+											12
+										</button>
+										<button type="" class="boton-responder">
+											responrder
+										</button>
+										<span class="tiempo-comentario">
+											hece 3 min
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	
+				</div>
+	
+			</div>
+	
+			<div class="comentar-publicacion">
+				<div class="avatar">
+					<img src="images/descarga (1).png" alt="img">
+				</div>
+			   <form action="#" method="post" class="comentar-comentario">
+				   <input type="text" name="" value="" placeholder="">
+				   <button type="" class="boton-enviar">
+					   <i class="fas fa-paper-plane"></i>
+				   </button>
+			   </form>
+			</div>
+			
+		</div>
+	</section>
+	
+	
+
+
+	</div>
+
+	
+<section class="contenedor-comentarios comments-section">
+	
+		<div class="publicacion-realizada">
+			<div class="usuario-publico">
+				<div class="avatar">
+					<img src="images/jhon.png" alt="img">
+				</div>
+				<div class="contenido-publicacion">
+					<a href="2.html" title="" class="nombre-usuario">John Smith</a>
+					<ul>
+						<li>Hace 2 horas</li>
+					</ul>
+				</div>
+				<div class="menu-comentario">
+					<i class="fas fa-pen"></i>
+					<ul class="menu">
+						<li><a href="">Editar</a></li>
+						<li><a href="">Eliminar</a></li>
+					</ul>
+				</div>
+			</div>
+			<p>¿Qué es el impresionismo en la pintura?</p>
+			<div class="archivo-publicado">
+			</div>
+			<div class="botones-comentario">
+				<button type="" class="boton-puntuar">
+					<i class="fas fa-thumbs-up"></i>
+					45
+				</button>
+				<button type="" class="boton-responder">
+					Comentar
+				</button>
+			</div>
+		</div>
+		<div class="comentarios-usuarios">
+			<!-- comentario principal -->
+		
+					
+	
+					<!-- contenedor sub comentarios -->
+					<div class="contenedor-sub-comentarios">
+						<!-- sub-comentario uno -->
+						<div class="comentario-principal-usuario">
+							<div class="avatar">
+								<img src="images/descarga (2).png" alt="img">
+							</div>
+							<div class="comentario">
+								<div class="usuario-comentario">
+									<div class="texto">
+										<a href="4.html" title="" class="nombre-usuario">Michael Brown</a>El impresionismo es una técnica de pintura que se originó en Francia a finales del siglo XIX. Se destaca por la representación de escenas cotidianas, paisajes y retratos con un enfoque en la luz y el color. ¿Quieres que te recomiende algunos artistas impresionistas famosos para que puedas conocer mejor su obra?
+										<div class="menu-comentario">
+											<i class="fas fa-pen"></i>
+											<ul class="menu">
+												<li><a href="">Editar</a></li>
+												<li><a href="">Eliminar</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="botones-comentario">
+										<button type="" class="boton-puntuar">
+											<i class="fas fa-thumbs-up"></i>
+											12
+										</button>
+										<button type="" class="boton-responder">
+											responrder
+										</button>
+										<span class="tiempo-comentario">
+											hece 3 min
+										</span>
+									</div>
+								</div>
+								<div class="comentario-principal-usuario">
+									<div class="avatar">
+										<img src="images/descarga (4).png" alt="img">
+									</div>
+									<div class="comentario">
+										<div class="usuario-comentario">
+											<div class="texto">
+												<a href="7.html" title="" class="nombre-usuario">Isabella anderson</a> He oído hablar del impresionismo pero no sé por qué es tan importante en la historia del arte.
+												<div class="menu-comentario">
+													<i class="fas fa-pen"></i>
+													<ul class="menu">
+														<li><a href="">Editar</a></li>
+														<li><a href="">Eliminar</a></li>
+													</ul>
+												</div>
+											</div>
+											<div class="botones-comentario">
+												<button type="" class="boton-puntuar">
+													<i class="fas fa-thumbs-up"></i>
+													5
+												</button>
+												<button type="" class="boton-responder">
+													responder
+												</button>
+												<span class="tiempo-comentario">
+													hece 3 min
+												</span>
+											</div>
+										</div>
+							</div>
+						</div>
+					</div>
+	
+				</div>
+	
+			</div>
+	
+			<div class="comentar-publicacion">
+				<div class="avatar">
+					<img src="images/descarga (1).png" alt="img">
+				</div>
+			   <form action="#" method="post" class="comentar-comentario">
+				   <input type="text" name="" value="" placeholder="">
+				   <button type="" class="boton-enviar">
+					   <i class="fas fa-paper-plane"></i>
+				   </button>
+			   </form>
+			</div>
+			
+		</div>
+	</section>
+	
+	
+
+
+	</div>
+	</body>
+	
+	</html>
+	</body>
+	
+	</html>

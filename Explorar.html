@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<title>Satori Kai</title>
+	<link rel="stylesheet" href="styles.css" />
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Formulario Registro</title>
+  <!-- Firebase JavaScript SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<link rel="icon" href="images/logito.png" type=" image/png"> </head>
+
+</head>
+<body>
+	<header>
+
+		<div class="container-hero">
+			<div class="container hero">
+				<div class="customer-support">
+					<div class="container-logo">
+            <img src="images/logo.png" >
+          </div>
+          
+					<div class="content-customer-support">
+					</div>
+				</div>
+
+				<div class="container-logo">
+					<h1 class="logo"><a href="/"><img src="images/Mori.png"></a></h1>
+				</div>
+
+				<div class="container-user">
+					<i class="fas fa-user" id="openModalBtn"></i>
+					<div class="modal-container" id="modal-register">
+					  <div class="form-container" id="loginFormContainer">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Login</h1>
+						<form id="loginForm">
+						  <input type="email" placeholder="Email" required>
+						  <input type="password" placeholder="Password" required>
+						  <button type="submit">Login</button>
+						  <p>¿No tienes una cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+						</form>
+					  </div>
+				  
+					  <div class="form-container" id="registrationFormContainer" style="display: none;">
+						<span class="close-btn" onclick="hideModal()">&times;</span>
+						<h1>Register</h1>
+						<form id="registrationForm" onsubmit="handleRegistration(event)">
+							<!-- Dentro del formulario de registro -->
+<input type="text" id="username" placeholder="Username" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+<button type="submit">Register</button>
+<p>¿Ya tienes una cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión</a></p>
+
+						</form>
+					  </div>
+					</div>
+				  </div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="container-navbar">
+			<nav class="navbar container">
+				<i class="fa-solid fa-bars"></i>
+				<ul class="menu">
+			
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="Explorar.html">Explora</a></li>
+					<li><a href="perfiles.html">Perfiles</a></li>
+					<li><a href="foro.html">Foro de discusión</a></li>
+					<li><a href="blog.html"> blog y recurosos</a></li>
+				</ul>
+
+				<form class="search-form" id="searchForm">
+					<input type="search" placeholder="Buscar..." id="searchInput" />
+					<button class="btn-search">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+			</nav>
+		</div>
+	</header>
+
+	<script>
+		document.getElementById("searchForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+	
+			const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+			let destinationUrl = "";
+	
+			switch (searchTerm) {
+				case "inicio":
+					destinationUrl = "index.html";
+					break;
+				case "explora":
+					destinationUrl = "Explorar.html";
+					break;
+				case "perfiles":
+					destinationUrl = "perfiles.html";
+					break;
+				case "foro":
+					destinationUrl = "foro.html";
+					break;
+				case "blog":
+				case "recursos":
+					destinationUrl = "blog.html";
+					break;
+				default:
+					// Handle other search terms or display a message if nothing matches
+					alert("No se encontraron resultados para la búsqueda.");
+					return;
+			}
+	
+			window.location.href = destinationUrl;
+		});
+	</script>
+
+					
+	
+	<form class="search-form" id="searchForm" action="explora.html">
+		</button>
+	  </form>
+	  
+	  
+	<script
+		src="https://kit.fontawesome.com/81581fb069.js"
+		crossorigin="anonymous"
+	></script>
+	<script>
+		
+		const openModalBtn = document.getElementById("openModalBtn");
+		const modalRegister = document.getElementById("modal-register");
+	  
+		// Function to show or hide the registration form when the user clicks the user icon
+		function toggleRegistrationForm() {
+		  modalRegister.style.display = modalRegister.style.display === "flex" ? "none" : "flex";
+		}
+	  
+		// Assign the click event to the user icon
+		openModalBtn.addEventListener("click", toggleRegistrationForm);
+	  
+		// Close the modal if the user clicks outside of it
+		window.onclick = function (event) {
+		  if (event.target === modalRegister) {
+			modalRegister.style.display = "none";
+		  }
+		};
+	  
+		// Function to show the login form and hide the registration form
+		function showLoginForm() {
+		  document.getElementById("loginFormContainer").style.display = "flex";
+		  document.getElementById("registrationFormContainer").style.display = "none";
+		}
+	  
+		// Function to show the registration form and hide the login form
+		function showRegisterForm() {
+		  document.getElementById("registrationFormContainer").style.display = "flex";
+		  document.getElementById("loginFormContainer").style.display = "none";
+		}
+	  
+		// Set the initial state to show the login form
+		showLoginForm();
+		
+		function hideModal() {
+    document.getElementById("modal-register").style.display = "none";
+  }
+
+  
+	  </script>
+	  
+	  <script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+		  apiKey: "YOUR_API_KEY",
+		  authDomain: "YOUR_AUTH_DOMAIN",
+		  databaseURL: "YOUR_DATABASE_URL",
+		  projectId: "YOUR_PROJECT_ID",
+		  storageBucket: "YOUR_STORAGE_BUCKET",
+		  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+		  appId: "YOUR_APP_ID"
+		};
+	  
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	  
+		// Function to register a new user
+		function registerUser(username, email, password) {
+		  var usersRef = firebase.database().ref("users");
+		  var newUserRef = usersRef.push();
+		  newUserRef.set({
+			username: username,
+			email: email,
+			password: password
+		  });
+		}
+	  </script>
+	  <script>
+		document.addEventListener("DOMContentLoaded", () => {
+  const existingTweets = getStoredTweets();
+  renderTweets(existingTweets);
+});
+
+	  </script>
+	  
+	   <script>
+		// Obtener los parámetros de búsqueda de la URL
+		const params = new URLSearchParams(window.location.search);
+		const searchQuery = params.get("q");
+	
+		// Mostrar los resultados de búsqueda en algún elemento del DOM
+		if (searchQuery) {
+		  // Aquí puedes realizar la búsqueda y mostrar los resultados en el DOM
+		  // Por ejemplo, puedes usar el valor de "searchQuery" para filtrar contenido
+		  // y mostrar los resultados en una lista o en cualquier otro formato deseado.
+	
+		  // Ejemplo: Mostrar los resultados en un elemento con el id "searchResults"
+		  const searchResultsElement = document.getElementById("searchResults");
+		  if (searchResultsElement) {
+			// Limpia el contenido existente, si lo hay
+			searchResultsElement.innerHTML = "";
+	
+			
+		  }
+		}
+	  </script>
+<main>
+
+	
+		    
+<style>
+	body {
+	   font-family: Arial, sans-serif;
+	   margin: 0;
+	   padding: 0;
+	   background-color: #f7f7f7;
+	 }
+  
+	 .blog-container {
+	   max-width: 800px;
+	   margin: 0 auto;
+	   padding: 20px;
+	   background-color: #ffffff;
+	   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	 }
+	 
+	 .blog {
+	   border: 1px solid #ddd;
+	   padding: 10px;
+	   margin-bottom: 15px;
+	 }
+	 
+	 .blog h3 {
+	   margin-top: 0;
+	 }
+	 
+	 .blog img {
+	   max-width: 100%;
+	   height: auto;
+	   margin-bottom: 10px;
+	 }
+	 
+	
+  
+  .use-profile {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #ffffff;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-info {
+   text-align: center;
+  }
+  
+  .use-avatar img {
+   width: 150px;
+   height: 150px;
+   border-radius: 50%;
+   margin-bottom: 10px;
+  }
+  
+  .use-name {
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 5px;
+  }
+  
+  .use-email {
+   color: #777;
+   margin-bottom: 20px;
+  }
+  
+  .use-info {
+   color: #555;
+   margin-bottom: 20px;
+  }
+  
+  .use-blogs {
+   margin-top: 30px;
+  }
+  
+  .blog {
+   border: 1px solid #ddd;
+   padding: 10px;
+   margin-bottom: 15px;
+  }
+  
+  .blog h3 {
+   margin-top: 0;
+  }
+  
+  /* Optional: Add some styles for links */
+  a {
+   color: #007BFF;
+   text-decoration: none;
+  }
+  
+  a:hover {
+   text-decoration: underline;
+  }
+  
+  
+   
+   nav ul {
+	 list-style: none;
+	 margin: 0;
+	 padding: 0;
+   }
+   
+   nav li {
+	 display: inline;
+	 margin-right: 1rem;
+   }
+   
+   nav a {
+	 color: #fff;
+	 text-decoration: none;
+   }
+   
+   main {
+	 padding: 1rem;
+   }
+   
+   section {
+	 margin-bottom: 2rem;
+   }
+   
+   
+   
+  </style>
+
+
+
+
+
+
+	  <div class="blog-container">
+		
+		<div class="blog">
+		  <h3>Introducción a Python        </h3>
+		  <img src="images/pyyy.png" alt="Realismo Mágico">
+		  <main>
+			<section id="introduccion">
+			  <h2></h2>
+			  <p>Python es un lenguaje de programación interpretado de alto nivel que se utiliza en una variedad de aplicaciones. Algunos de sus usos comunes incluyen la automatización de tareas, la ciencia de datos y el desarrollo de aplicaciones web.
+  
+				  Para empezar en Python, necesitas tener instalado el intérprete de Python en tu ordenador. Puedes descargarlo desde el sitio web oficial.</p>
+			</section>
+	
+  
+	<section id="raices">
+	  <p>Una vez que lo tienes instalado, puedes abrir el intérprete de Python y comenzar a escribir código. Primero, podemos imprimir un mensaje simple en la pantalla:
+		  <h3>print("Hola, mundo!") </h3>
+  
+  
+	  </p>
+	</section>
+
+	<section id="caracteristicas">
+		<p>Este código imprimirá "Hola, mundo!" en la pantalla. También podemos hacer algunas operaciones matemáticas simples:
+	<h3>print(2 + 2)
+	</h3>
+		</p> 
+		<p>Este código imprimirá "4" en la pantalla.
+			Finalmente, podemos utilizar variables para almacenar información y hacer operaciones con ella:</p>
+			<h3>x = 5
+				y = 10
+				print(x + y)
+				</h3>
+		<p> Este código imprimirá "15" en la pantalla.
+	
+			¡Y eso es una introducción básica a Python! Espero que te haya gustado este pequeño tutorial.</p>
+	  </section>
+	
+	  <div>
+	<div>
+	</main>
+	</div>
+	</div>  
+    
+	<style>
+		body {
+		   font-family: Arial, sans-serif;
+		   margin: 0;
+		   padding: 0;
+		   background-color: #f7f7f7;
+		 }
+	  
+		 .blog-container {
+		   max-width: 800px;
+		   margin: 0 auto;
+		   padding: 20px;
+		   background-color: #ffffff;
+		   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		 }
+		 
+		 .blog {
+		   border: 1px solid #ddd;
+		   padding: 10px;
+		   margin-bottom: 15px;
+		 }
+		 
+		 .blog h3 {
+		   margin-top: 0;
+		 }
+		 
+		 .blog img {
+		   max-width: 100%;
+		   height: auto;
+		   margin-bottom: 10px;
+		 }
+		 
+		
+	  
+	  .use-profile {
+	   max-width: 800px;
+	   margin: 0 auto;
+	   padding: 20px;
+	   background-color: #ffffff;
+	   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	  }
+	  
+	  .user-info {
+	   text-align: center;
+	  }
+	  
+	  .use-avatar img {
+	   width: 150px;
+	   height: 150px;
+	   border-radius: 50%;
+	   margin-bottom: 10px;
+	  }
+	  
+	  .use-name {
+	   font-size: 24px;
+	   font-weight: bold;
+	   margin-bottom: 5px;
+	  }
+	  
+	  .use-email {
+	   color: #777;
+	   margin-bottom: 20px;
+	  }
+	  
+	  .use-info {
+	   color: #555;
+	   margin-bottom: 20px;
+	  }
+	  
+	  .use-blogs {
+	   margin-top: 30px;
+	  }
+	  
+	  .blog {
+	   border: 1px solid #ddd;
+	   padding: 10px;
+	   margin-bottom: 15px;
+	  }
+	  
+	  .blog h3 {
+	   margin-top: 0;
+	  }
+	  
+	  /* Optional: Add some styles for links */
+	  a {
+	   color: #007BFF;
+	   text-decoration: none;
+	  }
+	  
+	  a:hover {
+	   text-decoration: underline;
+	  }
+	  
+	  
+	   
+	   nav ul {
+		 list-style: none;
+		 margin: 0;
+		 padding: 0;
+	   }
+	   
+	   nav li {
+		 display: inline;
+		 margin-right: 1rem;
+	   }
+	   
+	   nav a {
+		 color: #fff;
+		 text-decoration: none;
+	   }
+	   
+	   main {
+		 padding: 1rem;
+	   }
+	   
+	   section {
+		 margin-bottom: 2rem;
+	   }
+	   
+	   
+	   
+	  
+	  </style>
+		  <div class="blog-container">
+			<div class="blog">
+			  <h3>Tecnicas de arte</h3>
+			  <main>
+				<section id="introduccion">
+				  <p>Las técnicas de arte son muy variadas y cada artista tiene su forma de abordarlas. Aun así, hay algunas técnicas básicas que todo artista debe conocer. En este blog, hablaremos sobre algunas de ellas.
+	  
+				  </p>
+				</section>
+	  
+	  
+		<section id="raices">
+		  <h2>Dibujo</h2>
+		  <p> El dibujo es la técnica base de todas las formas de arte. Es importante tener una base sólida en dibujo para poder desarrollar otras técnicas.</p>
+		  <img src="images/dibujo.jpg" >
+	  
+	  </section>
+	  
+		<section id="raices">
+		  <h2>Pintura</h2>
+		  <p> La pintura es una técnica muy versátil que permite al artista crear diferentes acabados, desde el colorido acrílico hasta los tonos suaves del óleo.</p>
+		  <img src="images/pintura.jpg" >
+	  
+	  </section>
+	  
+		<section id="raices">
+		  <h2>Grabado</h2>
+		  <p>  El grabado es una técnica que se realiza al tallar y luego imprimir una imagen en superficie dura, como la madera o el metal.</p>
+		  <img src="images/grabado.jpg" >
+	  
+	  </section>
+		<section id="raices">
+		  <h2>Escultura</h2>
+		  <p> La escultura es una técnica en la que el artista utiliza diferentes materiales para crear formas tridimensionales. Puede ser una técnica muy desafiante, pero también muy gratificante.</p>
+		  <img src="images/escultura.jpeg" >
+	  
+	  </section>
+		
+		<div>
+	  <div>
+	  </main>
+	  </div>
+	  </div>
+	  
+	  
+		  </div>
+	   
+	  </div>
+	  </div>
+	  
+	  </div>
+	  
+	  </div>
+	  
+	</div>
+    <!--====  End of tarjeta  ====-->
+      
+<style>
+  body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f7f7f7;
+   }
+
+   .blog-container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #ffffff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+   
+   .blog {
+     border: 1px solid #ddd;
+     padding: 10px;
+     margin-bottom: 15px;
+   }
+   
+   .blog h3 {
+     margin-top: 0;
+   }
+   
+   .blog img {
+     max-width: 100%;
+     height: auto;
+     margin-bottom: 10px;
+   }
+   
+  
+
+.use-profile {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: #ffffff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+ text-align: center;
+}
+
+.use-avatar img {
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+ margin-bottom: 10px;
+}
+
+.use-name {
+ font-size: 24px;
+ font-weight: bold;
+ margin-bottom: 5px;
+}
+
+.use-email {
+ color: #777;
+ margin-bottom: 20px;
+}
+
+.use-info {
+ color: #555;
+ margin-bottom: 20px;
+}
+
+.use-blogs {
+ margin-top: 30px;
+}
+
+.blog {
+ border: 1px solid #ddd;
+ padding: 10px;
+ margin-bottom: 15px;
+}
+
+.blog h3 {
+ margin-top: 0;
+}
+
+/* Optional: Add some styles for links */
+a {
+ color: #007BFF;
+ text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;
+}
+
+
+ 
+ nav ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ nav li {
+   display: inline;
+   margin-right: 1rem;
+ }
+ 
+ nav a {
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+ main {
+   padding: 1rem;
+ }
+ 
+ section {
+   margin-bottom: 2rem;
+ }
+ 
+ 
+ 
+
+</style>
+    <div class="blog-container">
+      <div class="blog">
+        <h3>Realismo Mágico en la Literatura</h3>
+        <img src="images/realismo-magico.jpg" alt="Realismo Mágico">
+        <main>
+          <section id="introduccion">
+            <h2>¿Qué es el Realismo Mágico?</h2>
+            <p>El Realismo Mágico es un estilo literario que se originó en América Latina durante el siglo XX, aunque también ha influido en escritores de otras partes del mundo. Esta corriente se caracteriza por la inclusión de elementos mágicos, fantásticos o sobrenaturales en un contexto realista y cotidiano. Es una fusión sorprendente entre lo mundano y lo místico, donde lo imposible adquiere un sentido de normalidad.</p>
+          </section>
+  
+
+  <section id="raices">
+    <h2>Raíces Históricas del Realismo Mágico</h2>
+    <p>El Realismo Mágico emergió en una época marcada por grandes cambios sociales, políticos y culturales en América Latina. Los escritores encontraron en esta corriente una manera de reflejar la complejidad y riqueza de sus sociedades, utilizando elementos fantásticos para abordar cuestiones profundas y universales. Autores como Gabriel García Márquez (Cien años de soledad), Julio Cortázar (Rayuela) y Jorge Luis Borges (Ficciones) son algunos de los pilares fundamentales del movimiento.
+
+    </p>
+  </section>
+
+  <section id="caracteristicas">
+    <h2>Características del Realismo Mágico</h2>
+    <p>Ambiente Evocador: Los escritores realistas mágicos son maestros en crear ambientes cautivadores que evocan una sensación de lo misterioso y lo inexplicable. Utilizan una prosa poética y descriptiva que sumerge al lector en paisajes y escenarios oníricos.</p>
+    
+    <p>Tiempo Cíclico: El tiempo en estas obras suele ser circular, rompiendo con la linealidad que estamos acostumbrados. Los eventos históricos pueden repetirse o entrelazarse con los acontecimientos presentes, creando una sensación de atemporalidad. </p>
+    
+    <p>Lo Cotidiano y lo Extraordinario: Los elementos fantásticos se incorporan de manera natural en el día a día de los personajes, conviviendo con lo ordinario. Esto permite que los lectores se conecten con las historias a nivel emocional y reflexionen sobre aspectos de la existencia humana. </p>
+    <p> Personajes Míticos y Simbólicos: Los protagonistas a menudo están imbuidos de características míticas y simbólicas, representando arquetipos que trascienden lo individual.</p>
+  </section>
+
+  <section id="legado">
+    <h2>El Legado del Realismo Mágico</h2>
+    <p>El Realismo Mágico ha dejado un impacto duradero en la literatura mundial. Sus obras han sido traducidas a numerosos idiomas y se han convertido en referentes de la narrativa contemporánea. Además de los escritores latinoamericanos, este estilo ha influenciado a autores de otras regiones, como Isabel Allende (La casa de los espíritus) y Haruki Murakami (Tokio Blues).</p>
+  </section>
+
+  <section id="conclusion">
+    <h2>Conclusión</h2>
+    <p>El Realismo Mágico nos invita a explorar las fronteras entre lo real y lo imaginario, a cuestionar la naturaleza misma de la realidad y a descubrir la belleza en lo extraordinario. A través de sus páginas, este género literario nos ofrece una experiencia única y enriquecedora que nos conecta con la esencia misma de la humanidad.
+
+      Así que, la próxima vez que te adentres en un libro de Realismo Mágico, déjate llevar por la magia y la maravilla que solo esta corriente puede ofrecer. En un mundo donde lo sobrenatural se encuentra con lo cotidiano, el Realismo Mágico continúa inspirándonos y asombrándonos, recordándonos que la literatura es un portal hacia lo desconocido y lo fascinante.</p>
+  </section>
+  <div>
+<div>
+</main>
+</div>
+</div>
+	  </body>
+	  </html>
+
+
+	  
